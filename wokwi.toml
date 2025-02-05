@@ -1,0 +1,4 @@
+[wokwi]
+version = 1
+firmware = 'build/botao_timer.hex'
+elf = 'build/botao_timer.elf'

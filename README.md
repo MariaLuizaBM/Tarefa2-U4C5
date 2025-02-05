@@ -1,1 +1,10 @@
-# Tarefa2-U4C5
+Código que agenda um alarme para desligar o LED após 3 segundos (3000 ms).
+
+    Inicialmente, as bibliotecas necessárias são declaradas: a stdio.h, biblioteca padrão da linguagem C, pico/stdlib.h, biblioteca
+    padrão da Raspberry Pi Pico e o microcontrolador RP2040, e hardware/timer.h, necessária para a utilização de temporizadores de hardware na Raspberry Pi Pico.
+
+    Após isso, foram definidos os pinos dos LEDs e o botão utilizados na tarefa: vermelho (pino 12), azul (pino 11) e verde (pino 13), botão (pino 5). Além disso, foi necessária três variáveis booleanas para indicar se os LEDs estavam ligados (led_red_on, led_blue_on, led_green_on) e indicar se o botão estava apertado (button_pressed), uma variável chamada state para rastrear o estado atual dos LEDs e facilitar desligá-los na ordem correta na função de callback, e a estrutura timer para o temporizador de repetição ser configurado corretamente.
+
+    Na função turn_off_callback, os LEDs são desligados na ordem correta (azul, vermelho e verde) com o auxílio da variável state, e um alarme é configurado para esses LEDs apagarem depois de 3 segundos. A função turn_on_leds_callback, é utilizada para ligar todos os LEDs ao mesmo tempo e mantê-los ligados por 3 segundos, chamando, após isso, a função de callback que apaga os LEDs.
+
+    No int main, a função stdio_init_all() inicializa a comunicação, e todos os pinos dos LEDs são inicializados e definidos como sáidas, e o pino do botão é incializado e definido como entrada, com resistor de pull-up. No loop principal, há um checagem do botão para saber se ele está pressionado e todos os LEDs estão desligados, há um pequeno atraso para o debounce e há outra checagem do botão. Caso o botão esteja ligado, button_pressed = true e a função para ligar os LEDs por 3 segundos é chamada. Caso o botão não seja pressionado, button_pressed = false. Após isso, há uma pequena pausa para o novo começo do loop para reduzir o uso da CPU.
